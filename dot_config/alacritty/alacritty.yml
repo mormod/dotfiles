@@ -1,0 +1,15 @@
+font:
+  normal: 
+    family: FiraCode Nerd Font Mono
+    style: Regular
+  italic:
+    family: FiraCode Nerd Font Mono
+    style: Light
+  bold:
+    family: FiraCode Nerd Font Mono
+    style: Bold
+  emoji:
+    family: Noto Color Emoji
+    style: Regular
+
+  size: 12

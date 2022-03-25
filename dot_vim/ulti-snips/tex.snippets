@@ -1,0 +1,161 @@
+global !p
+import regex as re
+
+def g_clever_space():
+	if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', '{', '}', '[', ']', '<', '>', ':']:
+		return ' '
+	else:
+		return ''
+
+def get_last_sec_title(type):
+	if type == "section":
+		exit(0)
+	
+	d = {"section": 0, "subsection": 1, "subsubsection": 2, "paragraph": 3}
+	
+	reg = re.compile("\\contentsline \{([a-zA-Z]+)\}\{(.*?)\{(\.|\d)+\}([\w ]+)")
+	fd = reversed(list(open(str(snip.basename)+".toc", "r")))
+
+	if fd is None:
+		exit(0)
+
+	for line in fd:
+		res = reg.search(line)
+		if res != None and d[res.group(1)] < d[type]:
+
+			return res.group(4).replace(' ', '-').lower()
+
+	return ""
+endglobal
+
+snippet "be(g|gin)?( (\S+))?" "begin{} / end{}" rb
+\begin{${1:`!p snip.rv = match.group(3) if match.group(2) is not None else "env"`}}
+	${3:${VISUAL}}
+\end{$1}
+endsnippet
+
+snippet "def(i)?" "beg/end defi" rb
+\begin{defi}{$1}
+	$2
+\end{defi}
+endsnippet
+
+snippet iM "inline math" w
+\( ${1:${VISUAL}} \)`!p snip.rv = g_clever_space()`$2
+endsnippet
+
+snippet oM "outline math" w
+\[
+	${1:${VISUAL}}
+\]
+
+$0
+endsnippet
+
+snippet item "itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet enum "enumeration" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet cols "columns" b
+\begin{columns}
+	\column{${1:0.65}\textwidth}
+		${2:${VISUAL}}	
+	\column{`!p 
+try:
+	snip.rv = round(1.0 - float(t[1]), 2)
+except Exception:
+	snip.rv = 0
+`\textwidth}
+		$3
+\end{columns}$0
+endsnippet
+
+snippet nitem "\note[item]{}" 
+\note[item]{$1}$0
+endsnippet
+
+snippet fig "figure" b
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{$1}
+	\caption{$2}
+	\label{img-`!p snip.rv = str(t[1]).split('/')[-1].split('.')[0].replace('_', '-').lower()`}
+\end{figure}
+
+$0
+endsnippet
+
+snippet "bf( ((\S| )+))?" "boldface" wr
+\textbf{${1:`!p 
+snip.rv = match.group(2) if match.group(1) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
+endsnippet
+
+snippet "tt( ((\S| )+))?" "monospace" wr
+\texttt{${1:`!p 
+snip.rv = match.group(2) if match.group(1) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
+endsnippet
+
+snippet "tit( ((\S| )+))?" "italic" wr
+\textit{${1:`!p 
+snip.rv = match.group(2) if match.group(1) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
+endsnippet
+
+snippet clst "c listing" b
+\begin{lstlisting}[language=C]
+	$0
+\end{lstlisting}
+endsnippet
+
+snippet sec "section" b
+\newpage
+\section{$1}
+\label{s:`!p snip.rv = str(t[1]).replace(' ', '-').lower()`}
+
+$0
+endsnippet
+
+snippet ssec "subsection" b
+\subsection{$1}
+\label{ss:`!p snip.rv = get_last_sec_title("subsection")+":"+str(t[1]).replace(' ', '-').lower()`}
+
+$0
+endsnippet
+
+snippet sssec "subsection" b
+\subsubsection{$1}
+\label{sss:`!p snip.rv = get_last_sec_title("subsubsection")+":"+str(t[1]).replace(' ', '-').lower()`}
+
+$0
+endsnippet
+
+snippet pgf "paragraph" b
+\paragraph{$1}
+\label{pgf:`!p snip.rv = get_last_sec_title("paragraph")+":"+str(t[1]).replace(' ', '-').lower()`}
+
+$0
+endsnippet
+
+snippet "\\([a-zA-Z]+)" "generic cmd" ir
+\\`!p snip.rv = match.group(1)`{${1:${VISUAL}}}`!p snip.rv = g_clever_space()`$2 
+endsnippet
+
+snippet '([A-Za-z])(\d)' "auto subscript" wr
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+snippet '([A-Za-z])_\{(\d)\}(\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2) + match.group(3)`}
+endsnippet
+
+snippet bls "vspace -baselineskip"
+\vspace{-\baselineskip}
+endsnippet
+

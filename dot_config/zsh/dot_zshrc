@@ -1,0 +1,24 @@
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export UPDATE_ZSH_DAYS=1
+export DISABLE_UPDATE_PROMPT="true"
+
+ZSH_THEME="robbyrussell-custom"
+
+# misc 
+alias swayconf="$EDITOR ~/.config/sway/config"
+alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"
+
+# git
+alias gss="git status -bs"
+alias gap="git add --patch"
+alias gapa="git add --all --patch"
+alias gac="git add --all && git commit"
+alias gl="git log --graph"
+alias gri="git rebase -i"
+alias gpr="git pull -r"
+alias gcm="git commit -m"
+
+plugins=(z sudo colorize fast-syntax-highlighting colored-man-pages autoupdate zsh-autosuggestions fd)
+
+source $ZSH/oh-my-zsh.sh
+
