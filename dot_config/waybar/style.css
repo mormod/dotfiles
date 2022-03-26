@@ -37,6 +37,12 @@ window#waybar {
 	padding: 0px 5px 0px 5px;
 }
 
+#custom-powermenu {
+	min-width: 15px;
+	padding: 0px 8px 0px 5px;
+	color: #6B869E;
+}
+
 #custom-weather, #disk, #network, #temperature, #backlight, #pulseaudio, #battery {
 	padding: 0px 8px 0px 8px;
 }

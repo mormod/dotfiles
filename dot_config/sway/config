@@ -41,9 +41,9 @@ bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screensho
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" -t png "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')" && notify-send "Section Screenshot" "$(xdg-user-dir PICTURES)"
 bindsym $mod+Ctrl+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && notify-send "Full Screenshot" "$(xdg-user-dir PICTURES)"
 
-bindsym XF86AudioMute exec amixer sset Master toggle && notify-send "Volume" "$(amixer get Master | grep 'Front Left:' | awk '{ print $6}' | tr -d '[]')" 
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && notify-send "Volume" "+5 ($(amixer get Master | grep % | head -1 | awk '{print $5}'| sed -e 's/\[//' -e 's/\]//'))"
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && notify-send "Volume" "\-5 ($(amixer get Master | grep % | head -1 | awk '{print $5}'| sed -e 's/\[//' -e 's/\]//'))"
+bindsym XF86AudioMute exec amixer sset Master toggle 
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ 
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 
 bindsym XF86MonBrightnessUp exec light -A 5 && notify-send "Brightness" "+5 ($(light)%)"
 bindsym XF86MonBrightnessDown exec light -U 5 && notify-send "Brightness" "\-5 ($(light)%)"

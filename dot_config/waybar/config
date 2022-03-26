@@ -4,7 +4,7 @@
 
     "modules-left": ["sway/workspaces"],
     "modules-center": ["custom/media"],
-    "modules-right": ["network", "temperature", "disk", "backlight", "pulseaudio", "battery", "clock", "tray"],
+    "modules-right": ["network", "temperature", "disk", "backlight", "pulseaudio", "battery", "clock", "tray", "custom/powermenu"],
 
 
     "sway/workspaces": {
@@ -21,7 +21,7 @@
     "clock": {
         "format": "{:%A, %d.%m.%y %T}",
         "interval": 1,
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "battery": {
@@ -68,7 +68,7 @@
     "pulseaudio": {
         "format": "{icon}  {volume}%",
         "format-bluetooth": "  {volume}%",
-        "format-muted":"婢  Mute  ",
+        "format-muted":"婢  Mute",
         "interval": 60,
 
         "format-icons": {
@@ -97,10 +97,17 @@
         "on-scroll-down": "playerctl previous",
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
     },
+
     "disk": {
         "interval": 600,
         "format": "  {free}",
         "path": "/home",
 
+    },
+
+    "custom/powermenu": {
+        "interval": "once",
+        "format": " ",
+        "on-click": "swaynag -f 'FiraCode Nerd Font' -m 'What do you want to do?' -b 'Shutdown' 'systemctl poweroff' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'swaymsg exit' -s 'Nothing'"
     }
 }
