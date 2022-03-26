@@ -1,0 +1,17 @@
+snippet header ".h header and include guard" b
+/**
+ *
+ * @file		`!p snip.rv = fn`
+ * @brief 	$1
+ * @author 	Moritz R. Huellmann
+ * @date 		`date "+%d.%m.%y"`
+ *
+ */
+
+#ifndef ${2:`!p snip.rv = "_" + os.path.basename(os.getcwd()).upper() + "_" + path.replace(os.sep, "_").replace(".", "_").upper() + "_"`}
+#define $2
+
+$0
+
+#endif /* $2 */
+endsnippet
