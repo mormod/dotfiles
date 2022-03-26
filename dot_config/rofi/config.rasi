@@ -1,4 +1,4 @@
 configuration {
   modi: "drun,calc";
 }
-@theme "custom.rasi"
+@theme "arc-custom.rasi"

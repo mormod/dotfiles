@@ -1,0 +1,100 @@
+{
+    "layer": "top",	
+    "position": "top",
+
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/media"],
+    "modules-right": ["network", "temperature", "backlight", "pulseaudio", "battery", "clock", "tray"],
+
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-markup": true,
+        "format": "{index}" 
+    },
+
+    "tray": {
+        "icon-size": 12,
+        "spacing": 15
+    },
+
+    "clock": {
+        "format": "{:%A, %d.%m.%y %T}",
+        "interval": 1,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+            "full": 99,
+            "good": 98,
+            "normal": 98,
+            "warning": 20,
+            "critical": 20
+        },
+
+        "format": "{icon}   {capacity}%",
+        "format-good": "{icon}   {capacity}%", 
+        "format-full": "   {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "interval": 30
+    },
+
+
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-disconnected": "睊  Disconnected",
+        "interval": 60
+    },
+
+
+    "temperature": {
+        "thermal-zone": 0,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons":[""],
+        "interval": 30
+    },
+
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}  {percent}%  ",
+        "format-icons": ["","","",""],
+        "interval": 60
+    },
+
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%  ",
+        "format-bluetooth": "  {volume}%  ",
+        "format-muted":"婢  Mute  ",
+        "interval": 60,
+
+        "format-icons": {
+            "default": [""]
+        },
+
+        "on-click": "amixer sset Master toggle"    
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "interval": 300,
+        "exec": "curl -s 'wttr.in/?format=3'",
+        "exec-if": "ping wttr.in -c1",
+    },
+    
+    "custom/media": {
+        "format": "{icon} {}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 10,
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+    }
+}

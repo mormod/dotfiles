@@ -1,0 +1,65 @@
+* {
+    font-family: "FiraCode Nerd Font", "Font Awesome 6 Free";
+    font-size: 10px;
+		border-radius: 0;
+}
+
+window#waybar { 
+	background-color: #1D1F21;
+}
+
+.modules-left {
+	background-color: #1D1F21;
+	padding: 0px 0px 0px 0px;
+}
+
+.modules-right {
+	background-color: #1D1F21;
+	padding: 0px 5px 0px 0px;
+}
+
+#workspaces button {
+	padding: 0px 5px 0px 5px; 
+ 	min-width: 15px;
+	font-size: 12px;
+	color: #888888;
+}
+
+#workspaces button.focused { 
+	padding: 0px 5px 0px 5px; 
+	background-color: #6B869E;
+	color: #1D1F21;
+}
+
+#mode { 
+	background-color: #900000;
+	color: #ffffff;
+	padding: 0px 5px 0px 5px;
+}
+
+#custom-weather, #network, #temperature, #backlight, #pulseudio, #battery {
+	padding: 0px 5px 0px 15px;
+}
+    
+
+#clock {
+	margin: 0px 5px 0px 15px;
+}
+
+#tray{
+	padding: 0px 8px 0px 5px;
+	margin: 0px 5px 0px 5px;
+}
+
+#battery.critical {
+	color: #ff5555;
+}
+
+#network.disconnected {
+	color: #ff5555;
+}
+
+#pulseaudio.muted {
+	color: #E7C547;
+}
+

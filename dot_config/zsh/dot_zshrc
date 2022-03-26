@@ -7,6 +7,7 @@ ZSH_THEME="robbyrussell-custom"
 # misc 
 alias swayconf="$EDITOR ~/.config/sway/config"
 alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"
+alias grep="grep -in"
 
 # git
 alias gss="git status -bs"

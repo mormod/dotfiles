@@ -10,7 +10,7 @@ font pango: FiraCode Nerd Font Mono 8
 ### Variables
 set $mod Mod4
 set $term alacritty
-set $menu rofi -show drun -theme android_notification -font "FiraCode Nerd Font Mono 12"  
+set $menu rofi -show drun -font "FiraCode Nerd Font Mono 12"  
 
 ### Output configuration
 exec_always ~/src/scripts/monitor-setup.sh
@@ -154,28 +154,29 @@ client.focused_inactive #1D1F21 #666666 #C5C8C6 #81A2BE   #C5C8C6
 client.unfocused        #1D1F21 #333333 #888888 #81A2BE   #333333
 client.urgent           #D54E53 #D54E53 #FFFFFF #D54E53   #D54E53
 
-bar {
-    colors {
-        background #1D1F21
-        separator  #666666
-        focused_workspace  #6B869E #6B869E #1D1F21
-        active_workspace   #666666 #666666 #C5C8C6
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace   #D54E53 #D54E53 #FFFFFF
-        binding_mode       #D54E53 #D54E53 #FFFFFF
-    }
-    
-    position top
+#  bar {
+#      colors {
+#          background #1D1F21
+#          separator  #666666
+#          focused_workspace  #6B869E #6B869E #1D1F21
+#          active_workspace   #666666 #666666 #C5C8C6
+#          inactive_workspace #333333 #333333 #888888
+#          urgent_workspace   #D54E53 #D54E53 #FFFFFF
+#          binding_mode       #D54E53 #D54E53 #FFFFFF
+#      }
+#      
+#      position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command ~/src/scripts/sway_status.sh 
-    #status_command waybar
-}
+#      # When the status_command prints a new line to stdout, swaybar updates.
+#      # The default just shows the current date and time.
+#      status_command ~/src/scripts/sway_status.sh 
+#      #status_command waybar
+#  }
 
 # make sure those are always running
-exec_always mako -c ~/src/scripts/dots/.config/mako/config
+exec_always mako -c ~/.config/mako/config
 exec_always owncloud
+exec_always waybar
 
 default_border pixel 1
 default_floating_border pixel 3 
