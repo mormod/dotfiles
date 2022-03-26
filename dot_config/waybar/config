@@ -4,7 +4,7 @@
 
     "modules-left": ["sway/workspaces"],
     "modules-center": ["custom/media"],
-    "modules-right": ["network", "temperature", "backlight", "pulseaudio", "battery", "clock", "tray"],
+    "modules-right": ["network", "temperature", "disk", "backlight", "pulseaudio", "battery", "clock", "tray"],
 
 
     "sway/workspaces": {
@@ -59,15 +59,15 @@
 
     "backlight": {
         "device": "intel_backlight",
-        "format": "{icon}  {percent}%  ",
+        "format": "{icon}  {percent}%",
         "format-icons": ["","","",""],
         "interval": 60
     },
 
 
     "pulseaudio": {
-        "format": "{icon}  {volume}%  ",
-        "format-bluetooth": "  {volume}%  ",
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "  {volume}%",
         "format-muted":"婢  Mute  ",
         "interval": 60,
 
@@ -96,5 +96,11 @@
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+    },
+    "disk": {
+        "interval": 600,
+        "format": "  {free}",
+        "path": "/home",
+
     }
 }

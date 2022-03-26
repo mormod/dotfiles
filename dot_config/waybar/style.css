@@ -37,17 +37,16 @@ window#waybar {
 	padding: 0px 5px 0px 5px;
 }
 
-#custom-weather, #network, #temperature, #backlight, #pulseudio, #battery {
-	padding: 0px 5px 0px 15px;
+#custom-weather, #disk, #network, #temperature, #backlight, #pulseaudio, #battery {
+	padding: 0px 8px 0px 8px;
 }
-    
 
 #clock {
-	margin: 0px 5px 0px 15px;
+	margin: 0px 9px 0px 15px;
 }
 
 #tray{
-	padding: 0px 8px 0px 5px;
+	padding: 0px 8px 0px 8px;
 	margin: 0px 5px 0px 5px;
 }
 
