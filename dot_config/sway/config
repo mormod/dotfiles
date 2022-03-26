@@ -52,6 +52,7 @@ bindsym $mod+Shift+h mode hide
 
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [app_id="zoom"] floating enable
 
 # Kill focused window
 bindsym $mod+Shift+q kill
