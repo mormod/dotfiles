@@ -89,7 +89,7 @@
         "format": "{icon} {}",
         "escape": true,
         "return-type": "json",
-        "max-length": 40,
+        "max-length": 42,
         "on-click": "playerctl play-pause",
         "on-click-right": "playerctl stop",
         "smooth-scrolling-threshold": 10,
