@@ -45,11 +45,9 @@ snippet iM "inline math" w
 endsnippet
 
 snippet oM "outline math" w
-\[
+\begin{align*}
 	${1:${VISUAL}}
-\]
-
-$0
+\end{align*}$0
 endsnippet
 
 snippet item "itemize" b
@@ -88,15 +86,20 @@ snippet fig "figure" b
 	\includegraphics[width=\textwidth]{$1}
 	\caption{$2}
 	\label{img-`!p snip.rv = str(t[1]).split('/')[-1].split('.')[0].replace('_', '-').lower()`}
-\end{figure}
-
-$0
+\end{figure}$0
 endsnippet
 
 snippet "bf( ((\S| )+))?" "boldface" wr
 \textbf{${1:`!p 
 snip.rv = match.group(2) if match.group(1) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
 endsnippet
+
+priority 1
+snippet	"att( ((\S| )+))?" "attention" wr 
+\attention{${1:`!p 
+snip.rv = match.group(2) if match.group(1) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
+endsnippet
+priority 0
 
 snippet "tt( ((\S| )+))?" "monospace" wr
 \texttt{${1:`!p 
