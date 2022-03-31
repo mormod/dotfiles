@@ -38,6 +38,7 @@
         "format-good": "{icon}   {capacity}%", 
         "format-full": "   {capacity}%",
         "format-icons": ["", "", "", "", ""],
+        "format-charging": "{icon}   {capacity}%",
         "interval": 30
     },
 
