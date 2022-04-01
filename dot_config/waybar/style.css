@@ -60,9 +60,10 @@ window#waybar {
 	color: #ff5555;
 }
 
-#battery.charging {
+#battery.charging, #battery.full {
 	color: #b5bd68;
 }
+
 
 #network.disconnected {
 	color: #ff5555;

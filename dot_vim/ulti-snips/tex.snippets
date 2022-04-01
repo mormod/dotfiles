@@ -40,6 +40,14 @@ snippet "def(i)?" "beg/end defi" rb
 \end{defi}
 endsnippet
 
+snippet "alg(o)?" "beg/end algo" rb
+\begin{algo}{$1}
+	\begin{enumerate}
+		\item $2
+	\end{enumerate}
+\end{algo}
+endsnippet
+
 snippet iM "inline math" w
 \( ${1:${VISUAL}} \)`!p snip.rv = g_clever_space()`$2
 endsnippet
@@ -145,6 +153,12 @@ snippet pgf "paragraph" b
 
 $0
 endsnippet
+
+priority 1
+snippet "\\item" "\item[x]" br
+\\item[$1] – $2
+endsnippet
+priority 0
 
 snippet "\\([a-zA-Z]+)" "generic cmd" ir
 \\`!p snip.rv = match.group(1)`{${1:${VISUAL}}}`!p snip.rv = g_clever_space()`$2 

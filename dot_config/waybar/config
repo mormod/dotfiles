@@ -109,7 +109,7 @@
     "custom/powermenu": {
         "interval": "once",
         "format": " ",
-        "on-click": "swaynag -f 'FiraCode Nerd Font' -m 'What do you want to do?' -b 'Shutdown' 'systemctl poweroff' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'swaymsg exit' -s 'Nothing'"
+        "on-click": "swaynag -f 'FiraCode Nerd Font' -m 'What do you want to do?' -b 'Shutdown' 'systemctl poweroff' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'systemctl suspend' -s 'Nothing'"
     },
 
     "custom/pomo": {
