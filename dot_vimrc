@@ -21,7 +21,7 @@ set nowritebackup
 set filetype=on
 
 " Activate mouse support
-set mouse=a
+set mouse=nvi
 
 " Offset from cursor to top and bottom
 set scrolloff=10

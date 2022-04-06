@@ -7,6 +7,7 @@ def g_clever_space():
 	else:
 		return ''
 
+
 def get_last_sec_title(type):
 	if type == "section":
 		exit(0)
@@ -22,10 +23,11 @@ def get_last_sec_title(type):
 	for line in fd:
 		res = reg.search(line)
 		if res != None and d[res.group(1)] < d[type]:
-
-			return res.group(4).replace(' ', '-').lower()
+			res = re.sub(r"\W+", "-", res.group(4) + ":" + str(t[0]))
+			return res.lower()
 
 	return ""
+
 endglobal
 
 snippet "be(g|gin)?( (\S+))?" "begin{} / end{}" rb
@@ -155,7 +157,7 @@ $0
 endsnippet
 
 priority 1
-snippet "\\item" "\item[x]" br
+snippet "\\item(\s)?" "\item[x]" br
 \\item[$1] – $2
 endsnippet
 priority 0

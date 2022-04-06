@@ -36,6 +36,8 @@ input "3141:28694:SONiX_USB_DEVICE" {
 ### Key bindings
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec nautilus -w 
+bindsym $mod+Alt+Return exec rofi -show filebrowser
+
 
 bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Clipboard"
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" -t png "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')" && notify-send "Section Screenshot" "$(xdg-user-dir PICTURES)"
@@ -53,6 +55,7 @@ bindsym $mod+Shift+h mode hide
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="zoom"] floating enable
+for_window [class="qemu-system-i386"] floating enable
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -69,9 +72,6 @@ floating_modifier $mod normal
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
-
-# Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
