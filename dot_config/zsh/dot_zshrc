@@ -1,5 +1,5 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export UPDATE_ZSH_DAYS=1
+export UPDATE_ZSH_DAYS=7
 export DISABLE_UPDATE_PROMPT="true"
 
 ZSH_THEME="robbyrussell-custom"
