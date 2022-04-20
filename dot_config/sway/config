@@ -29,13 +29,17 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "de"
 }
 
+input "16700:34053:Dell_Dell_Universal_Receiver" {
+    xkb_layout "de"
+}
+
 input "3141:28694:SONiX_USB_DEVICE" {
     xkb_layout "eu"
 }
 
 ### Key bindings
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec nautilus -w 
+bindsym $mod+Shift+Return exec nautilus -w
 bindsym $mod+Alt+Return exec rofi -show filebrowser
 
 

@@ -1,8 +1,8 @@
 global !p
 import regex as re
 
-def g_clever_space():
-	if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', '{', '}', '[', ']', '<', '>', ':', '_', '^']:
+def g_clever_space(placeholder=2):
+	if t[placeholder] and t[placeholder][0] not in [',', '.', '?', '-', ' ', '{', '}', '[', ']', '<', '>', ':', '_', '^']:
 		return ' '
 	else:
 		return ''
@@ -178,3 +178,10 @@ snippet bls "vspace -baselineskip"
 \vspace{-\baselineskip}
 endsnippet
 
+snippet arw "single arrow" 
+\( \rightarrow \)`!p snip.rv = g_clever_space(1)`$1
+endsnippet
+
+snippet todo "todo inline"
+\todo[inline]{$1}`!p snip.rv = g_clever_space()`$2
+endsnippet

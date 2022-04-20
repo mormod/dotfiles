@@ -39,6 +39,7 @@ export MOZ_ENABLE_WAYLAND=1
 PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$GOPATH/bin
+PATH=$PATH:/home/mhuellmann/.local/share/gem/ruby/3.0.0/bin
 
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   exec sway
