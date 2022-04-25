@@ -32,6 +32,11 @@ set ignorecase
 " Activate line numbers
 set number
 
+" Expand all tabs to spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 " Reduce from 4000
 set updatetime=300
 
