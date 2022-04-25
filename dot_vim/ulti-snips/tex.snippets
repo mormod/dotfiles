@@ -7,24 +7,42 @@ def g_clever_space(placeholder=2):
 	else:
 		return ''
 
+def get_formatted_string(string):
+	tmp = re.sub(r"\W+", "-", str(string))
+	if tmp != '':
+		first_is_dash = tmp[0] == '-'
+		last_is_dash = tmp[-1] == '-'
+		if first_is_dash:
+			tmp = tmp[1:]
+		if last_is_dash and tmp != '':
+			tmp = tmp[:-1]
+		return tmp.lower()
+	return ''
+	
 
 def get_last_sec_title(type):
+
 	if type == "section":
-		exit(0)
+		return ''
 	
 	d = {"section": 0, "subsection": 1, "subsubsection": 2, "paragraph": 3}
-	
-	reg = re.compile("\\contentsline \{([a-zA-Z]+)\}\{(.*?)\{(\.|\d)+\}([\w ]+)")
+	di = {0: "section", 1: "subsection", 2: "subsubsection", 3: "paragraph"}	
+	reg = re.compile("\\contentsline \{([a-zA-Z]+)\}\{(.*?)\{(\.|\d)+\}((\w| )+)")
+
 	fd = reversed(list(open(str(snip.basename)+".toc", "r")))
 
 	if fd is None:
-		exit(0)
+		return ''
 
 	for line in fd:
 		res = reg.search(line)
-		if res != None and d[res.group(1)] < d[type]:
-			res = re.sub(r"\W+", "-", res.group(4) + ":" + str(t[0]))
-			return res.lower()
+		if res is not None and d[res.group(1)] < d[type]:
+			res = get_formatted_string(res.group(4))
+			last = get_last_sec_title(di[d[type] - 1])
+			if last == '':
+				return res.lower()
+			else:
+				return last + ":" + res.lower()
 
 	return ""
 
@@ -40,6 +58,12 @@ snippet "def(i)?" "beg/end defi" rb
 \begin{defi}{$1}
 	$2
 \end{defi}
+endsnippet
+
+snippet "theo" "beg/end theo" b
+\begin{theo}{$1}
+	$2
+\end{theo}
 endsnippet
 
 snippet "alg(o)?" "beg/end algo" rb
@@ -95,7 +119,7 @@ snippet fig "figure" b
 	\centering
 	\includegraphics[width=0.75\textwidth]{$1}
 	\caption{$2}
-	\label{img-`!p snip.rv = str(t[1]).split('/')[-1].split('.')[0].replace('_', '-').lower()`}
+	\label{img-`!p snip.rv = get_formatted_string(str(t[1]).split('/')[-1].split('.')[0])`}
 \end{figure}$0
 endsnippet
 
@@ -130,28 +154,31 @@ endsnippet
 snippet sec "section" b
 \newpage
 \section{$1}
-\label{s:`!p snip.rv = str(t[1]).replace(' ', '-').lower()`}
+\label{s:`!p snip.rv = get_formatted_string(t[1])`}
 
 $0
 endsnippet
 
 snippet ssec "subsection" b
 \subsection{$1}
-\label{ss:`!p snip.rv = get_last_sec_title("subsection")+":"+str(t[1]).replace(' ', '-').lower()`}
+\label{ss:`!p 
+snip.rv = get_last_sec_title("subsection") + ":" + get_formatted_string(t[1])`}
 
 $0
 endsnippet
 
 snippet sssec "subsection" b
 \subsubsection{$1}
-\label{sss:`!p snip.rv = get_last_sec_title("subsubsection")+":"+str(t[1]).replace(' ', '-').lower()`}
+\label{sss:`!p
+snip.rv = get_last_sec_title("subsubsection") + ":" + get_formatted_string(t[1])`}
 
 $0
 endsnippet
 
 snippet pgf "paragraph" b
 \paragraph{$1}
-\label{pgf:`!p snip.rv = get_last_sec_title("paragraph")+":"+str(t[1]).replace(' ', '-').lower()`}
+\label{pgf:`!p
+snip.rv = get_last_sec_title("paragraph") + ":" + get_formatted_string(t[1])`}
 
 $0
 endsnippet
