@@ -4,7 +4,7 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["network", "temperature", "disk", "backlight", "pulseaudio", "battery", "clock", "tray", "custom/powermenu"],
+    "modules-right": ["network", "custom/weather", "temperature", "backlight", "pulseaudio", "battery", "clock", "tray", "custom/powermenu"],
 
 
     "sway/workspaces": {
@@ -14,6 +14,7 @@
     },
 
     "tray": {
+        "show-passive-items": true,
         "icon-size": 12,
         "spacing": 15
     },
@@ -82,7 +83,7 @@
     "custom/weather": {
         "format": "{}",
         "interval": 300,
-        "exec": "curl -s 'wttr.in/?format=3'",
+        "exec": "curl -s 'wttr.in/?format=+%c%t'",
         "exec-if": "ping wttr.in -c1",
     },
     

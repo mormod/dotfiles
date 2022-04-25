@@ -43,7 +43,11 @@ window#waybar {
 	color: #6B869E;
 }
 
-#custom-weather, #disk, #network, #temperature, #backlight, #pulseaudio, #battery {
+#custom-weather {
+	padding: 0px 8px 0px 3px;
+}
+
+#disk, #network, #temperature, #backlight, #pulseaudio, #battery {
 	padding: 0px 8px 0px 8px;
 }
 
