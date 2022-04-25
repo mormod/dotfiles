@@ -187,7 +187,7 @@ client.urgent           #D54E53 #D54E53 #FFFFFF #D54E53   #D54E53
 # make sure those are always running
 exec_always mako -c ~/.config/mako/config
 exec_always owncloud
-exec_always waybar
+exec_always bash -c "pkill waybar; waybar"
 
 default_border pixel 1
 default_floating_border pixel 3 
