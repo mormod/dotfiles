@@ -65,6 +65,8 @@ for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="zoom"] floating enable
 for_window [class="qemu-system-i386"] floating enable
+for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
 
 # Kill focused window
 bindsym $mod+Shift+q kill
