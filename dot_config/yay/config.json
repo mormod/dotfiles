@@ -16,7 +16,7 @@
 	"gitbin": "git",
 	"gpgbin": "gpg",
 	"gpgflags": "",
-	"mflags": "-sic",
+	"mflags": "-si",
 	"sortby": "votes",
 	"searchby": "name",
 	"gitflags": "",
