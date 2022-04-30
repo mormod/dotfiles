@@ -27,14 +27,11 @@ exec_always swayidle -w \
          before-sleep '$lock' 
 
 ### Input configuration
-input "1:1:AT_Translated_Set_2_keyboard" {
-    xkb_layout "de"
-}
 
-input "16700:34053:Dell_Dell_Universal_Receiver" {
-    xkb_layout "de"
-}
+# the default for every keyboard should be the german layout
+input * xkb_layout "de"
 
+# except the one at my desk
 input "3141:28694:SONiX_USB_DEVICE" {
     xkb_layout "eu"
 }
@@ -67,7 +64,7 @@ for_window [app_id="zoom"] floating enable
 for_window [class="qemu-system-i386"] floating enable
 for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
-
+for_window [app_id="app" title="Widget"] floating enable
 # Kill focused window
 bindsym $mod+Shift+q kill
 
