@@ -56,13 +56,13 @@ endsnippet
 
 snippet "def(i)?" "beg/end defi" rb
 \begin{defi}{$1}
-	$2
+	${2:${VISUAL}}
 \end{defi}
 endsnippet
 
 snippet "theo" "beg/end theo" b
 \begin{theo}{$1}
-	$2
+	${2:${VISUAL}}
 \end{theo}
 endsnippet
 
@@ -79,9 +79,9 @@ snippet iM "inline math" w
 endsnippet
 
 snippet oM "outline math" w
-\begin{align*}
+\[
 	${1:${VISUAL}}
-\end{align*}$0
+\]$0
 endsnippet
 
 snippet item "itemize" b

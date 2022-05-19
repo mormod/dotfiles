@@ -66,6 +66,8 @@ for_window [class="qemu-system-i386"] floating enable
 for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
 for_window [app_id="app" title="Widget"] floating enable
+for_window [app_id="qalculate-gtk" title="Qalculate!"] floating enable
+for_window [app_id="pavucontrol" title="Volume Control"] floating enable
 # Kill focused window
 bindsym $mod+Shift+q kill
 
