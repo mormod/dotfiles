@@ -44,6 +44,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec nautilus -w
 bindsym $mod+Alt+Return exec rofi -show filebrowser
 
+bindsym $mod+Shift+M exec killall -SIGUSR1 waybar
 
 bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Clipboard"
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" -t png "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')" && notify-send "Section Screenshot" "$(xdg-user-dir PICTURES)"
