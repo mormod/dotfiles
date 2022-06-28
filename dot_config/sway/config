@@ -13,11 +13,12 @@ set $term alacritty
 set $menu rofi -show drun -font "FiraCode Nerd Font Mono 12"  
 set $lock swaylock -c 000000 -etk --font "Fira Code Nerd Font Mono" --font-size 24
 set $wobsock $XDG_RUNTIME_DIR/wob.sock
+set $wallpaper find ~/sciebo/bilder/wallpaper -maxdepth 1 -type f | shuf -n1
 
 ### Output configuration
 exec_always ~/src/scripts/monitor-setup.sh
 output * {
-    bg $(find ~/sciebo/bilder/wallpaper -type f | shuf -n1) fill
+    bg $($wallpaper) fill
 } 
 
 ### Idle configuration
@@ -45,7 +46,7 @@ bindsym $mod+Shift+Return exec nautilus -w
 bindsym $mod+Alt+Return exec rofi -show filebrowser
 
 bindsym $mod+Shift+M exec killall -SIGUSR1 waybar
-bindsym $mod+Shift+W exec swaymsg output "*" bg $(find ~/sciebo/bilder/wallpaper -type f | shuf -n1) fill
+bindsym $mod+Shift+W exec swaymsg output "*" bg $($wallpaper) fill
 
 bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Clipboard"
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" -t png "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')" && notify-send "Section Screenshot" "$(xdg-user-dir PICTURES)"
