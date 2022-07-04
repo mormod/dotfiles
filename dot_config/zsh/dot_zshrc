@@ -18,8 +18,11 @@ alias gl="git log --graph --stat"
 alias gri="git rebase -i"
 alias gpr="git pull -r"
 alias gcm="git commit -m"
+alias gd="git diff"
 
 plugins=(z sudo colorize fast-syntax-highlighting colored-man-pages autoupdate zsh-autosuggestions fd shrink-path)
 
 source $ZSH/oh-my-zsh.sh
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
