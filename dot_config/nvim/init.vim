@@ -24,6 +24,10 @@ set nowritebackup
 " filetype detection
 set filetype=on
 
+" spellchecking 
+set spell
+set spelllang=de_de,en
+
 " Activate mouse support
 set mouse=nvi
 
@@ -66,6 +70,10 @@ let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 " let g:tex_conceal='bg'
+" set default typesetting engine to xelatex
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-xelatex',
+    \}
 
 nnoremap <silent> <c-Up> :resize -1<CR>
 nnoremap <silent> <c-Down> :resize +1<CR>

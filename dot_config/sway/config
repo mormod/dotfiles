@@ -191,8 +191,10 @@ exec_always mako -c ~/.config/mako/config
 exec_always owncloud
 exec_always bash -c "pkill waybar; waybar"
 
-default_border pixel 1
+default_border pixel 2
 default_floating_border pixel 3 
 
 include /etc/sway/config.d/*
 
+# pass environment variables to dbus, hopefully enabling screensharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway

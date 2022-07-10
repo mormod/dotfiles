@@ -14,7 +14,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 export TERM="alacritty"
 export TERMINAL="alacritty"
-export EDITOR='vim'
+export EDITOR='nvim'
 export READER="zathura"
 export FILE="nautilus"
 export BROWSER="firefox"
