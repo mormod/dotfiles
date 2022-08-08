@@ -1,4 +1,4 @@
 configuration {
   modi: "drun,calc,filebrowser";
 }
-@theme "arc-custom.rasi"
+@theme "tokyonight-main.rasi"

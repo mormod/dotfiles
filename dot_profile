@@ -18,6 +18,7 @@ export EDITOR='nvim'
 export READER="zathura"
 export FILE="nautilus"
 export BROWSER="firefox"
+export VISUAL="nvim"
 
 # locale settings
 export LANG=en_US.UTF-8	
@@ -36,6 +37,8 @@ export LESSHISTFILE="-"
 # enable wayland for all mozilla applications
 export MOZ_ENABLE_WAYLAND=1
 
+export XKB_DEFAULT_OPTIONS=caps:escape
+
 PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$GOPATH/bin
@@ -45,3 +48,4 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   exec sway
 fi
 
+. "$HOME/.cargo/env"

@@ -17,6 +17,9 @@ call plug#end()
 
 lua require("nvim-tree").setup()
 
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Ctrl' 
+au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
 " Disable all backup files
 set nobackup
 set nowritebackup
@@ -40,6 +43,12 @@ set ignorecase
 " Activate line numbers
 set number
 
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+
 " Expand all tabs to spaces
 set tabstop=2
 set shiftwidth=2
@@ -54,6 +63,9 @@ set shortmess+=c
 " activate highlighting of current line
 set cursorline
 
+" folding
+set foldenable
+set 
 " i have no idea
 set runtimepath+=~/.config/nvim/syntax
 
@@ -69,11 +81,11 @@ let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
-" let g:tex_conceal='bg'
-" set default typesetting engine to xelatex
 let g:vimtex_compiler_latexmk_engines = {
     \ '_'                : '-xelatex',
     \}
+
+
 
 nnoremap <silent> <c-Up> :resize -1<CR>
 nnoremap <silent> <c-Down> :resize +1<CR>
@@ -96,7 +108,24 @@ let g:airline_powerline_fonts=1
 
 " Styling
 set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
+
+" Disable arrow keys to get used to vim bindings
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+
 
 " Jump to last position in opened file
 if has("autocmd")
@@ -144,11 +173,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+nmap <F2> <Plug>(coc-rename)
 
 augroup mygroup
   autocmd!
@@ -168,17 +193,6 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -189,50 +203,33 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocFzfList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocFzfList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocFzfList commands<cr>
+nnoremap <silent><nowait> <C-a>  :<C-u>CocFzfList diagnostics<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <space>o  :<C-u>CocFzfList outline<cr>
+nnoremap <silent><nowait> <leader>o  :<C-u>Files<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <space>f  :<C-u>Files<cr>
+nnoremap <silent><nowait> <leader>f  :<C-u>Rg<cr>
 " Search available sub commands.
-nnoremap <silent><nowait> <space>s  :<C-u>CocFzfList symbols<cr>
+nnoremap <silent><nowait> <leader>s  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocFzfListResume<CR>
+nnoremap <silent><nowait> <leader>p  :<C-u>CocFzfListResume<CR>
 " Search workspace symbols
-nnoremap <silent><nowait> <space><space>  :<C-u>CocFzfList<cr>
+nnoremap <silent><nowait> <leader>l  :<C-u>CocFzfList<cr>
 
 " add cocstatus into lightline
 let g:lightline = {
-	\ 'colorscheme': 'wombat',
+	\ 'colorscheme': 'gruvbox_material',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
 	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]

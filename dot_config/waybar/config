@@ -86,7 +86,7 @@
         "format": "{}",
         "interval": 300,
         "exec": "curl -s 'wttr.in/?format=+%c%t'",
-        "exec-if": "ping wttr.in -c1",
+        "exec-if": "ping wttr.in -c1 && [[ $(curl -s 'wttr.in/?format=+%c%t'| awk '{ print $1 }') -ne 'Unknown' ]]",
     },
     
     "custom/media": {
