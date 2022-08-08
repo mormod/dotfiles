@@ -65,9 +65,15 @@ set cursorline
 
 " folding
 set foldenable
-set 
+set foldlevelstart=10   " open folds by default
+set foldnestmax=10
+set foldmethod=indent
+
 " i have no idea
 set runtimepath+=~/.config/nvim/syntax
+
+" remap leader from \ to , 
+let mapleader=","
 
 " Goyo and limelight
 nnoremap <C-g> :Goyo<CR>
@@ -84,8 +90,6 @@ set conceallevel=1
 let g:vimtex_compiler_latexmk_engines = {
     \ '_'                : '-xelatex',
     \}
-
-
 
 nnoremap <silent> <c-Up> :resize -1<CR>
 nnoremap <silent> <c-Down> :resize +1<CR>
@@ -112,20 +116,18 @@ let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
 
+nnoremap <A-l> <C-I>
+nnoremap <A-h> <C-O>
+
 " Disable arrow keys to get used to vim bindings
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
 vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
-
 
 " Jump to last position in opened file
 if has("autocmd")
@@ -157,7 +159,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -170,7 +172,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight') 
 
 " Symbol renaming.
 nmap <F2> <Plug>(coc-rename)
@@ -188,44 +190,37 @@ augroup end
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
+"if has('nvim-0.4.0') || has('patch-8.2.0750')
+"  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"endif
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <C-a>  :<C-u>CocFzfList diagnostics<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <leader>o  :<C-u>Files<cr>
+nnoremap <silent><nowait> <C-o>  :<C-u>Files<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <leader>f  :<C-u>Rg<cr>
+nnoremap <silent><nowait> <C-f>  :<C-u>Rg<cr>
 " Search available sub commands.
-nnoremap <silent><nowait> <leader>s  :<C-u>CocFzfList symbols<cr>
+nnoremap <silent><nowait> <C-s>  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <C-j>  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <leader>p  :<C-u>CocFzfListResume<CR>
+nnoremap <silent><nowait> <C-k>  :<C-u>CocPrev<CR>
 " Search workspace symbols
-nnoremap <silent><nowait> <leader>l  :<C-u>CocFzfList<cr>
+nnoremap <silent><nowait> <C-l>  :<C-u>CocFzfList<cr>
 
 " add cocstatus into lightline
 let g:lightline = {

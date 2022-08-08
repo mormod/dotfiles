@@ -32,6 +32,9 @@ exec_always swayidle -w \
 # the default for every keyboard should be the german layout
 input * xkb_layout "de"
 
+# map caps to ctrl
+input * xkb_options caps:escape
+
 # except the one at my desk
 input "3141:28694:SONiX_USB_DEVICE" {
     xkb_layout "eu"
