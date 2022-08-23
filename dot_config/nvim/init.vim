@@ -12,13 +12,12 @@ Plug 'Raimondi/delimitMate'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
-
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 lua require("nvim-tree").setup()
-
-au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Ctrl' 
-au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+lua require("indent_blankline").setup()
 
 " Disable all backup files
 set nobackup
@@ -37,12 +36,13 @@ set mouse=nvi
 " Offset from cursor to top and bottom
 set scrolloff=10
 
-" case insensitve searching
+" case insensitive searching
 set ignorecase
 
 " Activate line numbers
 set number
 
+" relative line numbers in normal mode, absolute line numbers in input mode
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
@@ -50,8 +50,8 @@ augroup numbertoggle
 augroup END
 
 " Expand all tabs to spaces
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 " Reduce from 4000
@@ -65,9 +65,15 @@ set cursorline
 
 " folding
 set foldenable
-set foldlevelstart=10   " open folds by default
-set foldnestmax=10
+set foldlevelstart=0   " close all folds by default
+set foldnestmax=3
 set foldmethod=indent
+nnoremap <silent> <space> za <bar> :IndentBlanklineRefresh<cr>
+
+" highlight the current surrounding indent line of the cursor 
+let g:indent_blankline_show_current_context = v:true
+let g:indent_blankline_space_char_blankline = " "
+autocmd CursorMoved * IndentBlanklineRefresh
 
 " i have no idea
 set runtimepath+=~/.config/nvim/syntax
@@ -98,9 +104,8 @@ nnoremap <silent> <c-right> :vertical resize +1<CR>
 
 " UltiSnips configuration
 let &runtimepath.=',~/.vim' " Append parent of 'ulti-snips' to runtimepath
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<c-cr>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsSnippetDirectories=["ulti-snips"]
 
 " nvimTree Config 
@@ -142,10 +147,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-"                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -172,8 +173,6 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight') 
-
 " Symbol renaming.
 nmap <F2> <Plug>(coc-rename)
 
@@ -193,15 +192,9 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-"if has('nvim-0.4.0') || has('patch-8.2.0750')
-"  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"endif
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -212,15 +205,28 @@ nnoremap <silent><nowait> <C-a>  :<C-u>CocFzfList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent><nowait> <C-o>  :<C-u>Files<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <C-f>  :<C-u>Rg<cr>
+nnoremap <silent><nowait> <C-space>  :<C-u>Rg<cr>
 " Search available sub commands.
-nnoremap <silent><nowait> <C-s>  :<C-u>CocFzfList symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <C-j>  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <C-k>  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <C-d>  :<C-u>CocFzfList symbols<cr>
 " Search workspace symbols
-nnoremap <silent><nowait> <C-l>  :<C-u>CocFzfList<cr>
+nnoremap <silent><nowait> <C-A-l>  :<C-u>CocFzfList<cr>
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <C-x> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
+" remap for complete to use tab and <cr>
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " add cocstatus into lightline
 let g:lightline = {

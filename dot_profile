@@ -29,8 +29,6 @@ export LC_NUMERIC=de_DE.UTF-8
 export LC_ADDRESS=de_DE.UTF-8
 export LC_TELEPHONE=de_DE.UTF-8
 
-alias swayconf="$EDITOR ~/.config/sway/config"
-
 # disable less history
 export LESSHISTFILE="-"
 
