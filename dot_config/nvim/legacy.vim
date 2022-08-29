@@ -26,8 +26,9 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
-set autoindent
-set smartindent
+
+" always show the column left of line numberings for diagnostics
+set signcolumn=yes
 
 " Set time until plugin triggering
 set updatetime=300

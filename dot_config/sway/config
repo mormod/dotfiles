@@ -62,8 +62,6 @@ bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]
 bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $wobsock
 bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $wobsock
 
-bindsym $mod+Shift+h mode hide
-
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="zoom"] floating enable
@@ -89,6 +87,7 @@ floating_modifier $mod normal
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
+# window switching
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -98,6 +97,16 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # Switch to workspace
 bindsym $mod+1 workspace number 1
@@ -149,7 +158,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Lock screen
-bindsym $mod+Shift+L exec $lock 
+bindsym $mod+Ctrl+L exec $lock 
 
 # Resizing containers:
 mode "resize" {

@@ -1,12 +1,13 @@
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-	use 'tpope/vim-surround'
 	use 'tpope/vim-commentary'
 	use 'tpope/vim-dispatch'
 	use 'tpope/vim-fugitive'
 	use 'junegunn/fzf'
 	use 'junegunn/fzf.vim'
+	use 'junegunn/limelight.vim'
+	use 'junegunn/goyo.vim'
 	use 'neovim/nvim-lspconfig'
 	use 'glepnir/lspsaga.nvim'
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -17,14 +18,11 @@ return require('packer').startup(function()
 	use 'hrsh7th/nvim-cmp'
 	use 'nvim-lualine/lualine.nvim'
 	use 'ntpeters/vim-better-whitespace'
-	use 'preservim/vimux'
 	use 'zefei/vim-colortuner'
 	use 'morhetz/gruvbox'
 	use 'sainnhe/gruvbox-material'
 	use 'lervag/vimtex'
 	use 'SirVer/ultisnips'
-	use 'junegunn/limelight.vim'
-	use 'junegunn/goyo.vim'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'ray-x/lsp_signature.nvim'
 	use 'windwp/nvim-autopairs'
@@ -32,4 +30,7 @@ return require('packer').startup(function()
 	use 'williamboman/mason.nvim'
 	use 'gfanto/fzf-lsp.nvim'
 	use 'nvim-lua/plenary.nvim'
+	use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
+	use 'kyazdani42/nvim-tree.lua'
+	use 'mhinz/vim-signify'
 end)
