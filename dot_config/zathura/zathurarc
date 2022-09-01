@@ -8,3 +8,6 @@ set font "FiraCode Nerd Font Mono 11"
 set selection-clipboard clipboard
 set synctex true
 set synctex-editor-command "nvim --headless -c 'VimTexInverseSearch %{input} %{line}'"
+
+map l navigate next
+map h navigate previous

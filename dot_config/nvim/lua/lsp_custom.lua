@@ -29,9 +29,7 @@ local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, 'x', "<leader>f", '<cmd> vim.lsp.buf.range_formatting', opts)
-
-	vim.api.nvim_create_autocmd('CursorHold', { pattern = {'*'}, command = 'Lspsaga hover_doc'})
+	vim.api.nvim_buf_set_keymap(bufnr, 'x', "<leader>f", '<cmd> vim.lsp.buf.range_formatting<CR>', opts)
 end
 
 
@@ -56,7 +54,6 @@ require('lspconfig').clangd.setup({
 		"--pch-storage=memory",
 		"--clang-tidy",
 		"--all-scopes-completion",
-		"--pretty",
 		"--header-insertion=never",
 		"-j=8",
 		"--header-insertion-decorators",
@@ -70,7 +67,6 @@ require('lspconfig').rust_analyzer.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-
 
 require('lspconfig').sumneko_lua.setup({
 	on_attach = on_attach,
@@ -97,4 +93,9 @@ require('lspconfig').sumneko_lua.setup({
 		},
 	},
 	capabilities = capabilities,
+})
+
+require('lspconfig').texlab.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
 })

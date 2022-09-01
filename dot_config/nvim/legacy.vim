@@ -31,7 +31,7 @@ set noexpandtab
 set signcolumn=yes
 
 " Set time until plugin triggering
-set updatetime=300
+set updatetime=100
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -115,3 +115,5 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
+" do not show number of deleted lines but indicate with _
+let g:signify_sign_show_count = 0

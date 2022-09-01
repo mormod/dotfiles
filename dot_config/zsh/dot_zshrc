@@ -5,7 +5,7 @@ ZSH_THEME="robbyrussell-custom"
 
 # misc 
 alias swayconf="$EDITOR ~/.config/sway/config"
-alias nvimconf="$EDITOR ~/.config/nvim/init.vim"
+alias nvimconf="$EDITOR ~/.config/nvim"
 alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"
 alias grep="grep -in"
 alias ssh="TERM=xterm-256color ssh"
