@@ -1,6 +1,14 @@
 " disable all backup files
 set nobackup
 set nowritebackup
+set noswapfile
+
+" no line wrapping
+set nowrap
+
+" split and vsplit directions
+set splitbelow
+set splitright
 
 " file type detection
 set filetype=on
@@ -10,7 +18,10 @@ set nospell
 set spelllang=de_de,en
 
 " activate mouse support
-set mouse=nvi
+set mouse=a
+
+" yank to clipboard
+set clipboard=unnamedplus
 
 " offset from cursor to top and bottom
 set scrolloff=10
@@ -53,7 +64,7 @@ colorscheme gruvbox-material
 
 " folding
 set foldenable
-set foldlevelstart=0   " close all folds by default
+set foldlevelstart=99   " open all folds by default
 set foldnestmax=3
 set foldmethod=indent
 nnoremap <silent> f za <bar> :IndentBlanklineRefresh<cr>
@@ -97,9 +108,6 @@ let g:vimtex_compiler_latexmk_engines = {
 
 " UltiSnips configuration
 let &runtimepath.=',~/.vim' " Append parent of 'ulti-snips' to runtimepath
-let g:UltiSnipsExpandTrigger="<c-cr>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 let g:UltiSnipsSnippetDirectories=["ulti-snips"]
 
 " Jump to last position in opened file

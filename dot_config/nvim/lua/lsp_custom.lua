@@ -40,7 +40,7 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics,
-	{ update_in_insert = true }
+	{}
 )
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -72,25 +72,25 @@ require('lspconfig').sumneko_lua.setup({
 	on_attach = on_attach,
 	settings = {
 		Lua = {
-		runtime = {
-			-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-			version = "LuaJIT",
-		},
-		diagnostics = {
-			-- Get the language server to recognize the `vim` global
-			globals = { "vim" },
-		},
-		workspace = {
-			library = {
-				vim.fn.stdpath('data') .. "/site/pack/packer/opt/emmylua-nvim",
-				vim.fn.stdpath('config'),
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = "LuaJIT",
 			},
-		},
-		-- Do not send telemetry data containing a randomized but unique identifier
-		telemetry = {
-			enable = false,
-		},
-		},
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					vim.fn.stdpath('data') .. "/site/pack/packer/opt/emmylua-nvim",
+					vim.fn.stdpath('config'),
+				},
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		}
 	},
 	capabilities = capabilities,
 })

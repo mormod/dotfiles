@@ -1,14 +1,58 @@
--- activate focus mode
--- TODO: deactivate bar on enter, reactivate on exit
-vim.api.nvim_set_keymap('n', '<C-g>', ':Goyo<CR>', {silent = true})
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Normal Mode --
+-- Better window navigation
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+
+-- Resize with arrows
+keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+-- Move text up and down
+keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+
+-- Visual --
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "p", '"_dP', opts)
+
+-- Visual Block --
+-- Move text up and down
+keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- activate focus mode keymap('n', '<C-g>', ':Goyo<CR>', opts)
 
 -- file opening without tree or :{e,split,vsplit} ...
-vim.api.nvim_set_keymap('n', '<leader>o', ':GFiles<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-o>', ':Files<CR>', {silent = true})
+keymap('n', '<leader>o', ':GFiles<CR>', opts)
+keymap('n', '<C-o>', ':Files<CR>', opts)
+
+-- toggle tree
+keymap('n', '<leader>t', ':NvimTreeToggle<CR>', opts)
 
 -- nvim-tree --
 -- close on buffer open
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter" }, { pattern = {"*.*"}, command = "NvimTreeClose" })
--- toggle tree
-vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { silent = true })
 

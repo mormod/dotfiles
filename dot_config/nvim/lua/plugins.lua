@@ -33,4 +33,5 @@ return require('packer').startup(function()
 	use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
 	use 'kyazdani42/nvim-tree.lua'
 	use 'mhinz/vim-signify'
+	use 'akinsho/bufferline.nvim'
 end)

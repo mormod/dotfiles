@@ -147,23 +147,23 @@ endsnippet
 
 priority 1
 snippet	"([\s+|(|)|\[|\]|{|}|<|>])att( ((\S| )+))?" "attention" r
-`!p snip.rv = match.group(1)`\attention{${1:`!p
+\attention{${1:`!p
 snip.rv = match.group(3) if match.group(2) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
 endsnippet
 priority 0
 
 snippet "([\s+|(|)|\[|\]|{|}|<|>])tt( ((\S| )+))?" "monospace" r
-`!p snip.rv = match.group(1)`\texttt{${1:`!p
+\texttt{${1:`!p
 snip.rv = match.group(3) if match.group(2) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
 endsnippet
 
 snippet "([\s*|(|)|\[|\]|{|}|<|>])tit( ((\S| )+))?" "italic" r
-`!p snip.rv = match.group(1)`\textit{${1:`!p
+\textit{${1:`!p
 snip.rv = match.group(3) if match.group(2) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
 endsnippet
 
 snippet "([\s+|(|)|\[|\]|{|}|<|>])sc( ((\S| )+))?" "small caps" r
-`!p snip.rv = match.group(1)`\textsc{${1:`!p
+\textsc{${1:`!p
 snip.rv = match.group(3) if match.group(2) is not None else snip.v.text`}}`!p snip.rv = g_clever_space()`$2
 endsnippet
 
