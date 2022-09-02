@@ -176,33 +176,25 @@ endsnippet
 snippet sec "section" b
 \newpage
 \section{$1}
-\label{s:`!p snip.rv = get_formatted_string(t[1])`}
-
-$0
+\label{s:`!p snip.rv = get_formatted_string(t[1])`}$0
 endsnippet
 
 snippet ssec "subsection" b
 \subsection{$1}
 \label{ss:`!p
-snip.rv = get_last_sec_title("subsection") + ":" + get_formatted_string(t[1])`}
-
-$0
+snip.rv = get_last_sec_title("subsection") + ":" + get_formatted_string(t[1])`}$0
 endsnippet
 
 snippet sssec "subsubsection" b
 \subsubsection{$1}
 \label{sss:`!p
-snip.rv = get_last_sec_title("subsubsection") + ":" + get_formatted_string(t[1])`}
-
-$0
+snip.rv = get_last_sec_title("subsubsection") + ":" + get_formatted_string(t[1])`}$0
 endsnippet
 
 snippet pgf "paragraph" b
 \paragraph{$1}
 \label{pgf:`!p
-snip.rv = get_last_sec_title("paragraph") + ":" + get_formatted_string(t[1])`}
-
-$0
+snip.rv = get_last_sec_title("paragraph") + ":" + get_formatted_string(t[1])`}$0
 endsnippet
 
 priority 1

@@ -8,6 +8,8 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -20,14 +22,8 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif vim.fn["UltiSnips#CanJumpForwards"]() then
-				vim.fn["UltiSnips#ExpandSnippetOrJump"]()
-			elseif vim.fn["UltiSnips#CanExpandSnippet"]() then
-				vim.fn["UltiSnips#ExpandSnippet"]()
-			elseif check_backspace() then
-				fallback()
 			else
-				fallback()
+				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
 			end
 			end, {
 				"i",
@@ -36,10 +32,8 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif vim.fn["UltiSnips#CanJumpBackwards"]() then
-				vim.fn["UltiSnips#JumpBackwards"]()
 			else
-			fallback()
+				cmp_ultisnips_mappings.jump_backwards(fallback)
 			end
 			end, {
 				"i",
@@ -53,10 +47,10 @@ cmp.setup({
 		['<CR>'] = cmp.mapping.confirm({select = true}),
 	},
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp', keyword_length = 2},
-		{ name = 'ultisnips', keyword_length = 2 },
-		{ name = 'path', keyword_length = 2 },
-		{ name = 'buffer', keyword_length = 2 },
+		{ name = 'nvim_lsp' },
+		{ name = 'ultisnips' },
+		{ name = 'path' },
+		{ name = 'buffer' },
 	}),
 	experimental = {
 		ghost_text = true,
