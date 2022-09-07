@@ -10,7 +10,7 @@ font pango: FiraCode Nerd Font Mono 8
 ### Variables
 set $mod Mod4
 set $term alacritty
-set $menu rofi -show drun -font "FiraCode Nerd Font Mono 12"  
+set $menu rofi -show drun -font "FiraCode Nerd Font Mono 12"
 set $lock swaylock -c 000000 -etk --font "Fira Code Nerd Font Mono" --font-size 24
 set $wobsock $XDG_RUNTIME_DIR/wob.sock
 set $wallpaper find ~/sciebo/bilder/wallpaper -maxdepth 1 -type f | shuf -n1
@@ -19,13 +19,13 @@ set $wallpaper find ~/sciebo/bilder/wallpaper -maxdepth 1 -type f | shuf -n1
 exec_always ~/src/scripts/monitor-setup.sh
 output * {
     bg $($wallpaper) fill
-} 
+}
 
 ### Idle configuration
 exec_always swayidle -w \
          timeout 300 '$lock' \
          timeout 400 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep '$lock' 
+         before-sleep '$lock'
 
 ### Input configuration
 
@@ -55,8 +55,8 @@ bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screensho
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" -t png "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')" && notify-send "Section Screenshot" "$(xdg-user-dir PICTURES)"
 bindsym $mod+Ctrl+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && notify-send "Full Screenshot" "$(xdg-user-dir PICTURES)"
 
-bindsym XF86AudioMute exec amixer sset Master toggle 
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $wobsock 
+bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $wobsock
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $wobsock
 
 bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $wobsock
@@ -158,14 +158,19 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Lock screen
-bindsym $mod+Ctrl+L exec $lock 
+bindsym $mod+Ctrl+L exec $lock
 
 # Resizing containers:
 mode "resize" {
     bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
+    bindsym Down resize shrink height 10px
+    bindsym Up resize grow height 10px
     bindsym Right resize grow width 10px
+
+    bindsym h resize shrink width 10px
+    bindsym j resize shrink height 10px
+    bindsym k resize grow height 10px
+    bindsym l resize grow width 10px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -185,9 +190,11 @@ exec_always owncloud
 exec_always bash -c "pkill waybar; waybar"
 
 default_border pixel 2
-default_floating_border pixel 3 
+default_floating_border pixel 3
 
 include /etc/sway/config.d/*
 
 # pass environment variables to dbus, hopefully enabling screensharing
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK

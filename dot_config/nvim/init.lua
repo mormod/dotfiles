@@ -1,191 +1,21 @@
--- include all plugins
-require('plugins')
+require('local.plugins')
+require('local.keymaps')
+require('local.options')
 
-require('keymaps')
--- include everything that i am too lazy to port to lua
-vim.cmd([[
-	so ~/.config/nvim/legacy.vim
-]])
-
-require('lsp_signature').setup({
-	bind = false,
-    hint_prefix = "",
-	handler_opts = {
-		border ="single",
-	}
-})
-
--- inlcude neovim LSP and autocomplete configurations, as well as other custom keymaps
-require('lsp_custom')
-require('cmp_custom')
-
-require('lualine').setup({
-	options = {
-		icons_enabled = false,
-		section_separators = { left = '', right = ''}, -- make the line blocky
-	},
-	disabled_filetypes = {
-		statusline = { "dashboard" }
-	},
-	extensions = {
-		'nvim-tree'
-	}
-})
-
--- set up nice bracket matching
-require('nvim-autopairs').setup({})
-
--- nice popups and stuff for the lsp
-require('lspsaga').init_lsp_saga({
-	code_action_lightbulb = {
-		enable = false, -- disable hints on code actions
-	},
-	rename_action_quit = "<Esc>" -- escape the rename with esc instead of <C-c>
-})
-
--- best syntax highlighting
-require('nvim-treesitter.configs').setup {
-    highlight = {
-        enable = true,
-    },
-	auto_install = true, -- install new syntax files for unknown file types on demand
-	indent = {
-		enable = true,
-	},
-}
-
-require('indent_blankline').setup {
-	show_current_context = true, -- highlight the current relevant indent
-}
-
--- package manager for LSPs
-require("mason").setup({})
-
--- enhancement of FZF to display references and so on
-require('fzf_lsp').setup({})
-
-require('alpha').setup(require('alpha.themes.startify').config)
-
-require("nvim-tree").setup({
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
-  view = {
-    adaptive_size = true,
-  },
-})
-
-require('bufferline').setup({
-  options = {
-    numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-    max_name_length = 30,
-    max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
-    tab_size = 21,
-    diagnostics = false, -- | "nvim_lsp" | "coc",
-    diagnostics_update_in_insert = false,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-    show_buffer_icons = true,
-    show_buffer_close_icons = true,
-    show_close_icon = true,
-    show_tab_indicators = true,
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
-    enforce_regular_tabs = true,
-    always_show_bufferline = true,
-  },
-  highlights = {
-    fill = {
-      fg = { attribute = "fg", highlight = "#ff0000" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    background = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    -- buffer_selected = {
-    --   fg = {attribute='fg',highlight='#ff0000'},
-    --   bg = {attribute='bg',highlight='#0000ff'},
-    --   gui = 'none'
-    --   },
-    buffer_visible = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    close_button = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    close_button_visible = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    -- close_button_selected = {
-    --   fg = {attribute='fg',highlight='TabLineSel'},
-    --   bg ={attribute='bg',highlight='TabLineSel'}
-    --   },
-
-    tab_selected = {
-      fg = { attribute = "fg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
-    },
-    tab = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    tab_close = {
-      -- fg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
-      fg = { attribute = "fg", highlight = "TabLineSel" },
-      bg = { attribute = "bg", highlight = "Normal" },
-    },
-
-    duplicate_selected = {
-      fg = { attribute = "fg", highlight = "TabLineSel" },
-      bg = { attribute = "bg", highlight = "TabLineSel" },
-    },
-    duplicate_visible = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    duplicate = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    modified = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    modified_selected = {
-      fg = { attribute = "fg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
-    },
-    modified_visible = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    separator = {
-      fg = { attribute = "bg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-    separator_selected = {
-      fg = { attribute = "bg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
-    },
-    -- separator_visible = {
-    --   fg = {attribute='bg',highlight='TabLine'},
-    --   bg = {attribute='bg',highlight='TabLine'}
-    --   },
-    indicator_selected = {
-      fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-      bg = { attribute = "bg", highlight = "Normal" },
-    },
-  },
-})
+require('local.alpha')
+require('local.autopairs')
+require('local.cmp')
+require('local.indent_blankline')
+require('local.lsp')
+require('local.lsp_signature')
+require('local.lspsaga')
+require('local.lualine')
+require('local.mason')
+require('local.tree')
+require('local.treesitter')
+require('local.colorscheme')
+require('local.ultisnips')
+require('local.vimtex')
+require('local.signify')
+require('local.telescope')
+require('local.whitespace')

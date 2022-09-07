@@ -3,7 +3,7 @@ export UPDATE_ZSH_DAYS=7
 export DISABLE_UPDATE_PROMPT="true"
 ZSH_THEME="robbyrussell-custom"
 
-# misc 
+# misc
 alias swayconf="$EDITOR ~/.config/sway/config"
 alias nvimconf="$EDITOR ~/.config/nvim"
 alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"

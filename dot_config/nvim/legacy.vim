@@ -84,10 +84,10 @@ vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 
 " Easily resize buffers
-nnoremap <silent> <c-Up> :resize -1<CR>
-nnoremap <silent> <c-Down> :resize +1<CR>
-nnoremap <silent> <c-left> :vertical resize -1<CR>
-nnoremap <silent> <c-right> :vertical resize +1<CR>
+nnoremap <silent> <c-Up> :resize -2<CR>
+nnoremap <silent> <c-Down> :resize +2<CR>
+nnoremap <silent> <c-left> :vertical resize -2<CR>
+nnoremap <silent> <c-right> :vertical resize +2<CR>
 
 " Goyo and limelight
 nnoremap <C-g> :Goyo<CR>

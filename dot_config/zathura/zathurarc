@@ -9,6 +9,6 @@ set selection-clipboard clipboard
 set synctex true
 set synctex-editor-command "nvim --headless -c 'VimTexInverseSearch %{input} %{line}'"
 
-map j navigate next
-map k navigate previous
+map l navigate next
+map h navigate previous
 map m adjust_window best-fit
