@@ -1,6 +1,5 @@
 local ok, lsp_signature = pcall(require, 'lsp_signature')
 if not ok then
-	vim.notify('Config: Did not find lsp_signature!')
 	return
 end
 

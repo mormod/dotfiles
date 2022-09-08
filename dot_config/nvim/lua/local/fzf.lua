@@ -1,6 +1,5 @@
 local ok, fzf_lsp = pcall(require, 'fzf_lsp')
 if not ok then
-	vim.notify('Config: Did not find fzf_lsp!')
 	return
 end
 

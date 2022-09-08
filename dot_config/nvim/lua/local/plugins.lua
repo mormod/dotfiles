@@ -47,5 +47,6 @@ return packer.startup(function(use)
 	use 'mhinz/vim-signify'
 	use 'moll/vim-bbye'
     use 'nvim-telescope/telescope.nvim'
+    use 'akinsho/toggleterm.nvim'
 end)
 

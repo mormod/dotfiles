@@ -7,7 +7,6 @@ end
 telescope.setup({
     defaults = {
         scroll_strategz = "limit",
-        sorting_strategy = "ascending",
         layout_config = {
             horizontal = {
                 prompt_position = "bottom",
@@ -37,13 +36,17 @@ telescope.setup({
     path_display = "smart",
     file_sorter = require("telescope.sorters").get_fuzzy_file,
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    -- path_display = { "truncate" },
     pickers = {
         find_files = {
             hidden = true,
         },
         lsp_references = {
             initial_mode = "normal",
+        },
+        grep_string = {
+            only_sort_text = true,
+            search='',
+            prompt_title = "Fuzzy Search"
         }
     },
 })
@@ -52,4 +55,8 @@ telescope.setup({
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { link = 'Visual' })
 
 -- keymaps
-vim.api.nvim_set_keymap('n', '<leader>o', ':Telescope find_files<CR>', { noremap = true, silent = true })
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', '<leader>o',   '<cmd>Telescope find_files<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-q>',       '<cmd>Telescope loclist<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-Space>',   '<cmd>Telescope grep_stringrep_stringg<cr>', opts)
+

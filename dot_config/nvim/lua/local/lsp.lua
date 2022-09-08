@@ -10,9 +10,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 
-vim.api.nvim_set_keymap('n', '<C-e>',       '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-q>',       '<cmd>Telescope loclist<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-Space>',   '<cmd>Telescope live_grep<cr>', opts)
+vim.api.nvim_set_keymap('n', '<C-e>', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
