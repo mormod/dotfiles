@@ -9,7 +9,6 @@ vim.cmd([[
 
 local ok, packer = pcall(require, "packer")
 if not ok then
-	vim.notify('Config: Packer is not installed!')
 	return
 end
 
@@ -31,7 +30,6 @@ return packer.startup(function(use)
 	use 'quangnguyen30192/cmp-nvim-ultisnips'
 	use 'nvim-lualine/lualine.nvim'
 	use 'ntpeters/vim-better-whitespace'
-	use 'zefei/vim-colortuner'
 	use 'morhetz/gruvbox'
 	use 'sainnhe/gruvbox-material'
 	use 'lervag/vimtex'
@@ -44,9 +42,9 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
 	use 'kyazdani42/nvim-tree.lua'
-	use 'mhinz/vim-signify'
 	use 'moll/vim-bbye'
     use 'nvim-telescope/telescope.nvim'
     use 'akinsho/toggleterm.nvim'
+    use 'lewis6991/gitsigns.nvim'
 end)
 

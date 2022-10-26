@@ -4,7 +4,7 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["network", "custom/weather", "temperature", "backlight", "pulseaudio", "battery", "clock", "tray", "custom/powermenu"],
+    "modules-right": ["network", "temperature", "backlight", "pulseaudio", "battery", "clock", "tray", "custom/powermenu"],
 
 
     "sway/workspaces": {
@@ -86,7 +86,7 @@
         "format": "{}",
         "interval": 300,
         "exec": "curl -s 'wttr.in/?format=+%c%t'",
-        "exec-if": "ping wttr.in -c1 && [[ $(curl -s 'wttr.in/?format=+%c%t'| awk '{ print $1 }') -ne 'Unknown' ]]",
+        "exec-if": "ping wttr.in -c1",
     },
     
     "custom/media": {

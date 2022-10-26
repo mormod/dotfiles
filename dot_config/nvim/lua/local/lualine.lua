@@ -1,6 +1,5 @@
 local ok, lualine = pcall(require, 'lualine')
 if not ok then
-	vim.notify('Config: Did not find lualine!')
 	return
 end
 

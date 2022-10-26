@@ -1,6 +1,5 @@
 local ok, cmp = pcall(require, 'cmp')
 if not ok then
-	vim.notify('Config: Could not load cmp')
 	return
 end
 

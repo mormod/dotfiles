@@ -9,6 +9,7 @@ alias nvimconf="$EDITOR ~/.config/nvim"
 alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"
 alias grep="grep -in"
 alias ssh="TERM=xterm-256color ssh"
+alias v="nvim"
 # git
 alias gss="git status -bs"
 alias gap="git add --patch"
@@ -21,8 +22,9 @@ alias gcm="git commit -m"
 alias gd="git diff"
 alias gmt="git mergetool"
 alias grc="git rebase --continue"
+alias lg="lazygit"
 
-plugins=(z sudo colorize fast-syntax-highlighting colored-man-pages autoupdate zsh-autosuggestions fd shrink-path)
+plugins=(z colorize fast-syntax-highlighting colored-man-pages autoupdate zsh-autosuggestions fd shrink-path)
 
 source $ZSH/oh-my-zsh.sh
 

@@ -1,8 +1,3 @@
--- local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
--- if not ok then
--- 	vim.notify('Config: Did not find cmp_nvim_lsp')
--- 	return
--- end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -33,20 +28,19 @@ local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa',   '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr',   '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl',   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f',    '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, 'x', "<leader>f",    '<cmd>vim.lsp.buf.range_formatting<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f',    '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 end
 
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-	vim.lsp.handlers.hover,
-	{border = 'rounded'}
-)
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+-- 	vim.lsp.handlers.hover,
+-- 	{border = 'rounded'}
+-- )
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics,
-	{}
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+-- 	vim.lsp.diagnostic.on_publish_diagnostics,
+-- 	{}
+-- )
 
 local lspconfig = require('lspconfig')
 
@@ -107,4 +101,19 @@ lspconfig.texlab.setup({
 lspconfig.pyright.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+})
+
+lspconfig.dockerls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+lspconfig.bashls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
+
+lspconfig.jdtls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
 })

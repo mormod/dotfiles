@@ -1,6 +1,5 @@
 local ok, telescope = pcall(require, 'telescope')
 if not ok then
-    vim.notify("Config: Did not find telescope!")
     return
 end
 
@@ -41,6 +40,7 @@ telescope.setup({
             hidden = true,
         },
         lsp_references = {
+            theme = "cursor",
             initial_mode = "normal",
         },
         grep_string = {
@@ -58,5 +58,5 @@ vim.api.nvim_set_hl(0, 'TelescopeSelection', { link = 'Visual' })
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<leader>o',   '<cmd>Telescope find_files<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-q>',       '<cmd>Telescope loclist<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-Space>',   '<cmd>Telescope grep_stringrep_stringg<cr>', opts)
+vim.api.nvim_set_keymap('n', '<C-Space>',   '<cmd>Telescope grep_string<cr>', opts)
 

@@ -1,6 +1,5 @@
 local ok, bufferline = pcall(require, 'bufferline')
 if not ok then
-	vim.notify('Config: Did not find bufferline!')
 	return
 end
 

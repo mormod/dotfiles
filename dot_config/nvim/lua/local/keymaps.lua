@@ -37,6 +37,9 @@ keymap('n', '<leader>t', ':NvimTreeToggle<CR>', opts)
 -- save faster with
 keymap('n', '<leader>ww', ':w<CR>', opts)
 
+-- trigger fold with just leader f
+-- keymap('n', 'F', 'za <bar> IndentBlanklineRefresh<CR>', opts)
+
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -53,4 +56,3 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
