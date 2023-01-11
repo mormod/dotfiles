@@ -33,7 +33,7 @@ return packer.startup(function(use)
 	use 'morhetz/gruvbox'
 	use 'sainnhe/gruvbox-material'
 	use 'lervag/vimtex'
-	use 'SirVer/ultisnips'
+	-- use 'SirVer/ultisnips'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'ray-x/lsp_signature.nvim'
 	use 'windwp/nvim-autopairs'
@@ -46,5 +46,7 @@ return packer.startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'akinsho/toggleterm.nvim'
     use 'lewis6991/gitsigns.nvim'
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
 end)
 

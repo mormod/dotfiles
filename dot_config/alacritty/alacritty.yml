@@ -1,21 +1,7 @@
-import:
-  - ~/.config/alacritty/gruvbox-material-alacritty.yml
-
-env:
-  TERM: xterm-256color
-
+window:
+  dimensions:
+    columns: 130
+    lines: 20
 font:
-  normal:
-    family: Fira Mono
-    style: Regular
-  italic:
-    family: Fira Sans
-    style: Italic
-  bold:
-    family: Fira Mono
-    style: Bold
-  emoji:
-    family: Noto Color Emoji
-    style: Regular
+  size: 18
 
-  size: 12

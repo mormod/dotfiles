@@ -8,20 +8,13 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export VSCODE_EXTENSIONS="${XDG_DATA_HOME:-~/.local/share}/vscode/extensions"
 export _Z_DATA=$XDG_DATA_HOME/z  # moves z scripts datafile
 
-# make non-native wayland applications run
-export QT_QPA_PLATFORM=wayland
-export _JAVA_AWT_WM_NONREPARENTING=1
-export SDL_VIDEODRIVER=wayland
-export XDG_CURRENT_DESKTOP=sway
-export XDG_SESSION_DESKTOP=sway
-
 export TERM="alacritty"
 export TERMINAL="alacritty"
-export EDITOR='nvim'
-export READER="zathura"
+export EDITOR='alacritty -e nvim'
+export READER="alacritty -e zathura"
 export FILE="nautilus"
 export BROWSER="firefox"
-export VISUAL="nvim"
+export VISUAL="alacritty -e nvim"
 
 # locale settings
 export LANG=en_US.UTF-8
@@ -41,10 +34,5 @@ export MOZ_ENABLE_WAYLAND=1
 PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$GOPATH/bin
-PATH=$PATH:/home/mhuellmann/.local/share/gem/ruby/3.0.0/bin
-
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  exec sway
-fi
 
 . "$HOME/.cargo/env"

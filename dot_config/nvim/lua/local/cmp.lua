@@ -1,6 +1,11 @@
-local ok, cmp = pcall(require, 'cmp')
-if not ok then
+local ok_cmp, cmp = pcall(require, 'cmp')
+if not ok_cmp then
 	return
+end
+
+local ok_luasnip, luasnip = pcall(require, 'luasnip')
+if not ok_luasnip then
+    return
 end
 
 -- TODO: check existance
@@ -17,7 +22,7 @@ vim.opt.completeopt = 'menuone,noselect'
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	mapping = {
@@ -26,8 +31,10 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			else
-				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 			end
 			end, {
 				"i",
@@ -36,8 +43,8 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			else
-				cmp_ultisnips_mappings.jump_backwards(fallback)
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
 			end
 			end, {
 				"i",
@@ -52,7 +59,7 @@ cmp.setup({
 	},
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'ultisnips' },
+		{ name = 'luasnip' },
 		{ name = 'path' },
 		{ name = 'buffer' },
 	}),
