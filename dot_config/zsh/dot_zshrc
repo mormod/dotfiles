@@ -1,4 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
+
+export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
 
 # Path to your oh-my-zsh installation.
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
@@ -7,7 +10,7 @@ export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 ZSH_THEME="robbyrussell-custom"
 
 # Configure used plugins
-plugins=(shrink-path)
+plugins=(z shrink-path)
 
 # Useful aliasses
 alias nvimconf="$EDITOR ~/.config/nvim"
@@ -27,6 +30,7 @@ alias gd="git diff"
 alias gmt="git mergetool"
 alias grc="git rebase --continue"
 alias lg="lazygit"
+alias o="xdg-open"
 
 # Source the sauce
 source $ZSH/oh-my-zsh.sh

@@ -8,9 +8,6 @@ if not ok_luasnip then
     return
 end
 
--- TODO: check existance
-local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
-
 -- set selection mode
 vim.opt.completeopt = 'menuone,noselect'
 
@@ -64,7 +61,7 @@ cmp.setup({
 		{ name = 'buffer' },
 	}),
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 	}
 })
 

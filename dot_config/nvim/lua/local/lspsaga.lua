@@ -3,7 +3,7 @@ if not ok then
 	return
 end
 
-lspsaga.init_lsp_saga({
+lspsaga.setup({
 	code_action_lightbulb = {
 		enable = false, -- disable hints on code actions
 	},

@@ -10,11 +10,11 @@ export _Z_DATA=$XDG_DATA_HOME/z  # moves z scripts datafile
 
 export TERM="alacritty"
 export TERMINAL="alacritty"
-export EDITOR='alacritty -e nvim'
+export EDITOR='nvim'
 export READER="alacritty -e zathura"
 export FILE="nautilus"
 export BROWSER="firefox"
-export VISUAL="alacritty -e nvim"
+export VISUAL="nvim"
 
 # locale settings
 export LANG=en_US.UTF-8
@@ -34,5 +34,6 @@ export MOZ_ENABLE_WAYLAND=1
 PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$GOPATH/bin
+PATH=$PATH:$HOME/.cargo/bin
 
 . "$HOME/.cargo/env"
