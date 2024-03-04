@@ -7,7 +7,9 @@ end
 treesitter.setup {
     highlight = {
         enable = true,
+        disable = {"latex", "tex"},
     },
+    ensure_installed = {"regex", "markdown_inline"},
 	auto_install = true, -- install new syntax files for unknown file types on demand
 	indent = {
 		enable = true,

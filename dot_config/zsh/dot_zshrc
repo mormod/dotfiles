@@ -1,6 +1,9 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
 
+export NOMAD_HOME=$HOME/src/nomad/
+export PATH=$NOMAD_HOME/bin:$PATH
+
 export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
 
 # Path to your oh-my-zsh installation.
@@ -11,6 +14,14 @@ ZSH_THEME="robbyrussell-custom"
 
 # Configure used plugins
 plugins=(z shrink-path)
+alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-update-all='export TMPFILE="$(mktemp)"; \
+    sudo true; \
+    rate-mirrors --save=$TMPFILE --entry-country DE --completion 1 --protocol https arch --max-delay=21600  \
+      && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+      && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+      && ua-drop-caches \
+      && yay -Syyu --noconfirm'
 
 # Useful aliasses
 alias nvimconf="$EDITOR ~/.config/nvim"
@@ -31,6 +42,7 @@ alias gmt="git mergetool"
 alias grc="git rebase --continue"
 alias lg="lazygit"
 alias o="xdg-open"
+alias del="rmtrash"
 
 # Source the sauce
 source $ZSH/oh-my-zsh.sh

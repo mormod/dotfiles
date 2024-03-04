@@ -34,8 +34,8 @@ keymap("n", "<A-h>", "<C-O>", opts)
 -- toggle tree
 keymap('n', '<leader>t', ':NvimTreeToggle<CR>', opts)
 
--- save faster with
-keymap('n', '<leader>ww', ':w<CR>', opts)
+-- toggle folds
+keymap('n', 'f', 'za', opts)
 
 -- trigger fold with just leader f
 -- keymap('n', 'F', 'za <bar> IndentBlanklineRefresh<CR>', opts)

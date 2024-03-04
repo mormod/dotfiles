@@ -40,7 +40,7 @@ telescope.setup({
             hidden = true,
         },
         lsp_references = {
-            theme = "cursor",
+            -- theme = "cursor",
             initial_mode = "normal",
         },
         grep_string = {
@@ -50,6 +50,8 @@ telescope.setup({
         }
     },
 })
+
+telescope.load_extension('luasnip')
 
 -- make the highlight lines the same as a visual selection
 vim.api.nvim_set_hl(0, 'TelescopeSelection', { link = 'Visual' })

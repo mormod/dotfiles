@@ -25,6 +25,7 @@ return packer.startup(function(use)
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-path'
+	use {'hrsh7th/cmp-buffer', after = "hrsh7th/nvim-cmp", requires = "hrsh7th/nvim-cmp" }
 	use 'hrsh7th/cmp-cmdline'
 	use 'hrsh7th/cmp-git'
 	use 'nvim-lualine/lualine.nvim'
@@ -38,7 +39,7 @@ return packer.startup(function(use)
 	use 'simrat39/rust-tools.nvim'
 	use 'williamboman/mason.nvim'
 	use 'nvim-lua/plenary.nvim'
-	use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
+	use {'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons' }
 	use 'kyazdani42/nvim-tree.lua'
 	use 'moll/vim-bbye'
     use 'nvim-telescope/telescope.nvim'
@@ -46,5 +47,13 @@ return packer.startup(function(use)
     use 'lewis6991/gitsigns.nvim'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
+    use {'folke/trouble.nvim', requires = 'nvim-tree/nvim-web-devicons'}
+    use 'benfowler/telescope-luasnip.nvim'
+    use 'rcarriga/nvim-notify'
+    -- use 'stefanlogue/hydrate.nvim'
+    use '~/src/hydrate.nvim'
+    use 'navarasu/onedark.nvim'
+    use "rebelot/kanagawa.nvim"
+    use { "catppuccin/nvim", as = "catppuccin" }
 end)
 
