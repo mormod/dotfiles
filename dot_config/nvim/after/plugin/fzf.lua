@@ -10,3 +10,5 @@ fzf_lsp.setup({})
 -- file opening without tree or :{e,split,vsplit} ...
 vim.api.nvim_set_keymap('n', '<leader>o', ':GFiles<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-o>', ':Files<CR>', { noremap = true, silent = true })
+
+

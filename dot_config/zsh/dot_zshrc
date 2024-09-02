@@ -6,14 +6,20 @@ export PATH=$NOMAD_HOME/bin:$PATH
 
 export MANPATH=$MANPATH:/usr/local/texlive/2022/texmf-dist/doc/man
 
+CONFIG_HOME=$XDG_CONFIG_HOME
+if (( $+XDG_CONFIG_HOME == 0 )); then
+    CONFIG_HOME=~/.config
+fi
+
 # Path to your oh-my-zsh installation.
-export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export ZSH="$CONFIG_HOME/oh-my-zsh"
 
 # Set theme
 ZSH_THEME="robbyrussell-custom"
 
 # Configure used plugins
-plugins=(z shrink-path)
+#zsh-autocomplete
+plugins=(z shrink-path zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting )
 alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
 alias ua-update-all='export TMPFILE="$(mktemp)"; \
     sudo true; \
@@ -25,10 +31,12 @@ alias ua-update-all='export TMPFILE="$(mktemp)"; \
 
 # Useful aliasses
 alias nvimconf="$EDITOR ~/.config/nvim"
+alias tmuxconf="$EDITOR ~/.tmux.conf"
 alias smm="cd ~/src/syncMyMoodle && source .venv/bin/activate && python -m syncmymoodle && deactivate && cd -"
 alias grep="grep -in"
 alias ssh="TERM=xterm-256color ssh"
 alias v="nvim"
+alias c="clear"
 alias gss="git status -bs"
 alias gap="git add --patch"
 alias gapa="git add --all --patch"

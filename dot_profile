@@ -8,8 +8,8 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export VSCODE_EXTENSIONS="${XDG_DATA_HOME:-~/.local/share}/vscode/extensions"
 export _Z_DATA=$XDG_DATA_HOME/z  # moves z scripts datafile
 
-export TERM="alacritty"
-export TERMINAL="alacritty"
+# export TERM="alacritty"
+# export TERMINAL="alacritty"
 export EDITOR='nvim'
 export READER="alacritty -e zathura"
 export FILE="nautilus"

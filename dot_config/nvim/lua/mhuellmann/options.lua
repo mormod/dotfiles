@@ -1,5 +1,6 @@
 local options = {
-	backup = true,
+	backup = false,
+    colorcolumn = '120',
 	writebackup = false,
 	swapfile = false,
 	splitright = true,
@@ -28,6 +29,11 @@ local options = {
     wrapmargin = 0,
 }
 
+-- set selection mode
+vim.opt.completeopt = 'menuone,noinsert,noselect'
+-- Avoid showing extra messages when using completion
+vim.opt.shortmess = vim.opt.shortmess + "c"
+
 vim.opt.shortmess:append('c')
 vim.opt.iskeyword:append('-')
 vim.opt.whichwrap:append('<,>,[,],h,l')
@@ -42,14 +48,14 @@ vim.opt["formatoptions"]:remove{"l"}
 -- vim.opt["formatoptions"]:append{"t"}
 
 
--- -- relative line numbers in normal, absolut in insert mode
--- vim.cmd([[
--- 	augroup numbertoggle
--- 	  autocmd!
--- 	  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
--- 	  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
--- 	augroup END
--- ]])
+-- relative line numbers in normal, absolut in insert mode
+vim.cmd([[
+	augroup numbertoggle
+	  autocmd!
+	  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+	  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+	augroup END
+]])
 
 -- jump to last position in file
 vim.cmd([[
